@@ -1,0 +1,1 @@
+export { Tableau } from './src/tableau.jsx'
