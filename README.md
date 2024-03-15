@@ -24,7 +24,7 @@ Vous pouvez ensuite utiliser le composant Tableau comme n'importe quel autre com
 ## Params
 
 Le composant `Tableau` accepte différents paramètres :
-- `content` (Array<Object>) : Permet d'afficher les données fournis sous forme de tableau.
+- `content` (Array:(object)) : Permet d'afficher les données fournis sous forme de tableau.
 - `entries` (Array) : Permet la gestion personnalisé d'affichage des entrées du tableau.
 - `showing` (boolean) : Permet d'afficher ou non le nombre total d'élément du tableau et par page.
 - `backColor` (string) : La couleur de fond du tableau.
