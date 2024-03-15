@@ -29,7 +29,7 @@ Le composant `Tableau` accepte différents paramètres :
 - `showing` (boolean) : Permet d'afficher ou non le nombre total d'élément du tableau et par page.
 - `backColor` (string) : La couleur de fond du tableau.
 - `lineColor` (string) : La couleur des lignes du tableau.
-- `buttonColor` (string) : La couleur de fond des buttons de changement de page du tableau.
+- `buttonColor` (string) : La couleur des bouttons du tableau.
 - `sizeW` (string) : La largeur du tableau.
 - `sizeH` (string) : La hauteur du tableau.
 

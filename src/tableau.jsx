@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from "react";
+import HeadTable from "./headTableau";
 import './tableau.css'
 import { useState } from 'react';
 
@@ -9,7 +10,7 @@ import { useState } from 'react';
  * @param {boolean} showing - indicates whether or not we display the number of elements in the table.
  * @param {string} backColor - The background color to apply, in CSS format.
  * @param {string} lineColor - The line color to apply, in CSS format.
- * @param {string} buttonColor - The background button color to apply, in CSS format.
+ * @param {string} buttonColor - The button color to appy, in CSS format.
  * @param {string} sizeH - The height to apply, in CSS format (for example '100px').
  * @param {string} sizeW - The width to apply, in CSS format (for example '100px').
  * @return {ReactNode} The rendered table component.
@@ -24,11 +25,9 @@ export default function Tableau({ content, entries, showing, backColor, lineColo
 
 	let columns = [];
 	let displayedContent = [];
-
 	let allPages = Math.ceil(content.length / tab)
 	const startIndex = (currentPage - 1) * tab;
 	const endIndex = startIndex + tab;
-
 
 	// Function page change
 	function changeSelect(e) {
@@ -41,7 +40,6 @@ export default function Tableau({ content, entries, showing, backColor, lineColo
 			setCurrentPage(pageNumber)
 		}
 	}
-
 
 	// Function de tri
 	function ColumnTri(key) {
@@ -57,13 +55,11 @@ export default function Tableau({ content, entries, showing, backColor, lineColo
 		return new Date(`${year}-${month}-${day}`);
 	};
 
-
 	// Trier les données
 	if (sortConfig.key) {
 		content.sort((a, b) => {
 			const valueA = a[sortConfig.key.content];
 			const valueB = b[sortConfig.key.content];
-
 			const isDateA = /^\d{2}\/\d{2}\/\d{4}$/.test(valueA);
 			const isDateB = /^\d{2}\/\d{2}\/\d{4}$/.test(valueB);
 
@@ -116,22 +112,7 @@ export default function Tableau({ content, entries, showing, backColor, lineColo
 	}
 
 	return <>
-		<div className='show' style={{ width: sizeW }}>
-
-			<div>
-				Show
-				<select name="entries" id="entries" className='show_select' onChange={changeSelect}>
-					{entries.map((content, index) => {
-						return <option key={index} value={content}>{content}</option>
-					})}
-				</select>
-				entries
-			</div>
-
-			<input className='search' type="search" placeholder='Search' onChange={handleChange} />
-
-		</div>
-
+		<HeadTable sizeW={sizeW} changeSelect={changeSelect} entries={entries} handleChange={handleChange} />
 
 		<table className='list' style={{ width: sizeW, height: sizeH }}>
 			{filteredContent.length === 0 ? <div>La recherche n&apos;a donné aucun résultat correspondant à votre requête.</div> : null}
@@ -155,20 +136,16 @@ export default function Tableau({ content, entries, showing, backColor, lineColo
 			</tbody>
 		</table>
 
-
 		{filteredContent.length === 0 ? null : <div style={{ width: sizeW }} className={showing === false ? 'show center' : 'show'}>
-
 			{showing === false ? null : <div>
 				Showing {startIndex + 1} to {filteredContent.length < content.length ?
 					endIndex > filteredContent.length ? filteredContent.length : endIndex : endIndex > content.length ? content.length : endIndex} of {filteredContent.length < content.length ? filteredContent.length : content.length} entries
 			</div>}
-
 			<div className='show_page'>
 				<div style={{ backgroundColor: buttonColor }} className='show_page_prev show_page_button' onClick={() => changePage(currentPage - 1)}>Previous</div>
 				<div className='show_page_text'>{currentPage}/{allPages}</div>
 				<div style={{ backgroundColor: buttonColor }} className='show_page_next show_page_button' onClick={() => changePage(currentPage + 1)}>Next</div>
 			</div>
-
 		</div>}
 	</>
 }

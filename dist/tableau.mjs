@@ -1,51 +1,54 @@
-import * as t from "react";
-import { useState as g } from "react";
-function O({ content: a, entries: k, showing: p, backColor: N, lineColor: b, buttonColor: E, sizeH: S, sizeW: m }) {
-  const [r, x] = g(parseInt(k[0])), [h, P] = g(1), [l, T] = g({ key: null, direction: "ascending" }), [$, D] = g("");
-  let i = [], y = [], f = Math.ceil(a.length / r);
-  const u = (h - 1) * r, c = u + r;
+import * as n from "react";
+import { useState as k } from "react";
+function j({ sizeW: a, changeSelect: h, entries: u, handleChange: E }) {
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "show", style: { width: a } }, /* @__PURE__ */ React.createElement("div", null, "Show", /* @__PURE__ */ React.createElement("select", { name: "entries", id: "entries", className: "show_select", onChange: h }, u.map((g, m) => /* @__PURE__ */ React.createElement("option", { key: m, value: g }, g))), "entries"), /* @__PURE__ */ React.createElement("input", { className: "search", type: "search", placeholder: "Search", onChange: E })));
+}
+function M({ content: a, entries: h, showing: u, backColor: E, lineColor: g, buttonColor: m, sizeH: S, sizeW: p }) {
+  const [s, R] = k(parseInt(h[0])), [y, T] = k(1), [l, $] = k({ key: null, direction: "ascending" }), [x, P] = k("");
+  let i = [], C = [], v = Math.ceil(a.length / s);
+  const f = (y - 1) * s, r = f + s;
+  function D(e) {
+    const t = parseInt(e.target.value);
+    R(t);
+  }
+  function w(e) {
+    e !== 0 && e !== v + 1 && T(e);
+  }
   function A(e) {
-    const n = parseInt(e.target.value);
-    x(n);
+    let t = "ascending";
+    (l.key === e || l.direction === "ascending") && (t = "descending"), $({ key: e, direction: t });
   }
-  function C(e) {
-    e !== 0 && e !== f + 1 && P(e);
-  }
-  function B(e) {
-    let n = "ascending";
-    (l.key === e || l.direction === "ascending") && (n = "descending"), T({ key: e, direction: n });
-  }
-  const v = (e) => {
-    const [n, o, d] = e.split("/");
-    return /* @__PURE__ */ new Date(`${d}-${o}-${n}`);
+  const _ = (e) => {
+    const [t, o, d] = e.split("/");
+    return /* @__PURE__ */ new Date(`${d}-${o}-${t}`);
   };
-  if (l.key && a.sort((e, n) => {
-    const o = e[l.key.content], d = n[l.key.content], L = /^\d{2}\/\d{2}\/\d{4}$/.test(o), j = /^\d{2}\/\d{2}\/\d{4}$/.test(d);
-    if (L && j) {
-      const w = v(e[l.key.content]), _ = v(n[l.key.content]);
-      if (w < _)
+  if (l.key && a.sort((e, t) => {
+    const o = e[l.key.content], d = t[l.key.content], I = /^\d{2}\/\d{2}\/\d{4}$/.test(o), L = /^\d{2}\/\d{2}\/\d{4}$/.test(d);
+    if (I && L) {
+      const b = _(e[l.key.content]), N = _(t[l.key.content]);
+      if (b < N)
         return l.direction === "ascending" ? 1 : -1;
-      if (w > _)
+      if (b > N)
         return l.direction === "ascending" ? -1 : 1;
     } else {
-      if (e[l.key.content] < n[l.key.content])
+      if (e[l.key.content] < t[l.key.content])
         return l.direction === "ascending" ? 1 : -1;
-      if (e[l.key.content] > n[l.key.content])
+      if (e[l.key.content] > t[l.key.content])
         return l.direction === "ascending" ? -1 : 1;
     }
   }), a.length > 0) {
-    let e = a.slice(u, c);
-    i = Object.keys(e[0] || {}), y = e.slice(0, r);
+    let e = a.slice(f, r);
+    i = Object.keys(e[0] || {}), C = e.slice(0, s);
   }
-  const I = (e) => {
-    D(e.target.value);
-  }, s = a.filter((e) => i.some((n) => e[n].toString().toLowerCase().includes($.toLowerCase())));
-  if (s.length < a.length) {
-    let e = s.slice(u, c);
-    i = Object.keys(e[0] || {}), y = e.slice(0, r), f = Math.ceil(s.length / r);
+  const B = (e) => {
+    P(e.target.value);
+  }, c = a.filter((e) => i.some((t) => e[t].toString().toLowerCase().includes(x.toLowerCase())));
+  if (c.length < a.length) {
+    let e = c.slice(f, r);
+    i = Object.keys(e[0] || {}), C = e.slice(0, s), v = Math.ceil(c.length / s);
   }
-  return /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("div", { className: "show", style: { width: m } }, /* @__PURE__ */ t.createElement("div", null, "Show", /* @__PURE__ */ t.createElement("select", { name: "entries", id: "entries", className: "show_select", onChange: A }, k.map((e, n) => /* @__PURE__ */ t.createElement("option", { key: n, value: e }, e))), "entries"), /* @__PURE__ */ t.createElement("input", { className: "search", type: "search", placeholder: "Search", onChange: I })), /* @__PURE__ */ t.createElement("table", { className: "list", style: { width: m, height: S } }, s.length === 0 ? /* @__PURE__ */ t.createElement("div", null, "La recherche n'a donné aucun résultat correspondant à votre requête.") : null, /* @__PURE__ */ t.createElement("thead", null, /* @__PURE__ */ t.createElement("tr", null, i.map((e, n) => /* @__PURE__ */ t.createElement("th", { key: n, onClick: () => B({ content: e }), className: "list_thead" }, e)))), /* @__PURE__ */ t.createElement("tbody", null, y.map((e, n) => /* @__PURE__ */ t.createElement("tr", { key: n }, i.map((o, d) => /* @__PURE__ */ t.createElement("td", { key: d, className: n !== 0 ? "list_tbody list_line" : "list_tbody", style: { backgroundColor: N, borderColor: b } }, e[o])))))), s.length === 0 ? null : /* @__PURE__ */ t.createElement("div", { style: { width: m }, className: p === !1 ? "show center" : "show" }, p === !1 ? null : /* @__PURE__ */ t.createElement("div", null, "Showing ", u + 1, " to ", s.length < a.length ? c > s.length ? s.length : c : c > a.length ? a.length : c, " of ", s.length < a.length ? s.length : a.length, " entries"), /* @__PURE__ */ t.createElement("div", { className: "show_page" }, /* @__PURE__ */ t.createElement("div", { style: { backgroundColor: E }, className: "show_page_prev show_page_button", onClick: () => C(h - 1) }, "Previous"), /* @__PURE__ */ t.createElement("div", { className: "show_page_text" }, h, "/", f), /* @__PURE__ */ t.createElement("div", { style: { backgroundColor: E }, className: "show_page_next show_page_button", onClick: () => C(h + 1) }, "Next"))));
+  return /* @__PURE__ */ n.createElement(n.Fragment, null, /* @__PURE__ */ n.createElement(j, { sizeW: p, changeSelect: D, entries: h, handleChange: B }), /* @__PURE__ */ n.createElement("table", { className: "list", style: { width: p, height: S } }, c.length === 0 ? /* @__PURE__ */ n.createElement("div", null, "La recherche n'a donné aucun résultat correspondant à votre requête.") : null, /* @__PURE__ */ n.createElement("thead", null, /* @__PURE__ */ n.createElement("tr", null, i.map((e, t) => /* @__PURE__ */ n.createElement("th", { key: t, onClick: () => A({ content: e }), className: "list_thead" }, e)))), /* @__PURE__ */ n.createElement("tbody", null, C.map((e, t) => /* @__PURE__ */ n.createElement("tr", { key: t }, i.map((o, d) => /* @__PURE__ */ n.createElement("td", { key: d, className: t !== 0 ? "list_tbody list_line" : "list_tbody", style: { backgroundColor: E, borderColor: g } }, e[o])))))), c.length === 0 ? null : /* @__PURE__ */ n.createElement("div", { style: { width: p }, className: u === !1 ? "show center" : "show" }, u === !1 ? null : /* @__PURE__ */ n.createElement("div", null, "Showing ", f + 1, " to ", c.length < a.length ? r > c.length ? c.length : r : r > a.length ? a.length : r, " of ", c.length < a.length ? c.length : a.length, " entries"), /* @__PURE__ */ n.createElement("div", { className: "show_page" }, /* @__PURE__ */ n.createElement("div", { style: { backgroundColor: m }, className: "show_page_prev show_page_button", onClick: () => w(y - 1) }, "Previous"), /* @__PURE__ */ n.createElement("div", { className: "show_page_text" }, y, "/", v), /* @__PURE__ */ n.createElement("div", { style: { backgroundColor: m }, className: "show_page_next show_page_button", onClick: () => w(y + 1) }, "Next"))));
 }
 export {
-  O as default
+  M as default
 };
