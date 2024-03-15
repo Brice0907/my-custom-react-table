@@ -5,16 +5,16 @@ import { defineConfig } from 'vite'
 export default defineConfig({
 	build: {
 		lib: {
-			entry: resolve(__dirname, 'src/Modal.jsx'),
-			name: 'react-modal-jarod41',
+			entry: resolve(__dirname, 'src/tableau.jsx'),
+			name: 'my-custom-react-table',
 
-			fileName: 'Modal',
+			fileName: 'tableau',
 		},
 		rollupOptions: {
 			output: {
 				assetFileNames: (assetInfo) => {
-					if (assetInfo.name === 'Modal.css') {
-						return 'Modal.css'
+					if (assetInfo.name === 'tableau.css') {
+						return 'tableau.css'
 					}
 					return assetInfo.name
 				},
